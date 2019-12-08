@@ -2,18 +2,20 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
 
+interface Item {
+  ID: number;
+  title: string;
+  content: string;
+  date: string;
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  posts: {
-    ID: number;
-    title: string;
-    content: string;
-    date: string;
-  }[] = [];
+  posts: Item[] = [];
 
   constructor(private http: HttpClient, public loadingController: LoadingController) {
   }
@@ -22,11 +24,16 @@ export class HomePage {
     const loading = await this.loadingController.create({
       message: 'Loading...'
     });
-    await loading.present();
+    if (!this.posts.length) {
+      await loading.present();
+    }
     this.http.get('https://public-api.wordpress.com/rest/v1.1/sites/ionicjp.wordpress.com/posts').subscribe(data => {
       this.posts = data['posts'];
       loading.dismiss();
     });
   }
 
+  trackByFn(index, item: Item): number {
+    return item.ID;
+  }
 }
