@@ -9,7 +9,7 @@ describe('TaskListPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskListPage ],
+      declarations: [TaskListPage],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

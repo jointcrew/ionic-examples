@@ -7,14 +7,11 @@ interface Task {
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  styleUrls: ['home.page.scss']
 })
 export class HomePage {
   title = 'タスク登録';
-  tasks: Task[] = [
-    { name: 'タスク1' },
-    { name: 'タスク2' },
-  ];
+  tasks: Task[] = [{ name: 'タスク1' }, { name: 'タスク2' }];
   task: string;
   constructor() {}
 
@@ -31,5 +28,4 @@ export class HomePage {
     localStorage.tasks = JSON.stringify(this.tasks);
     this.task = '';
   }
-
 }

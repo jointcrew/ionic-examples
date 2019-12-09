@@ -4,17 +4,16 @@ import { ActionSheetController, AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.page.html',
-  styleUrls: ['./task-list.page.scss'],
+  styleUrls: ['./task-list.page.scss']
 })
 export class TaskListPage implements OnInit {
-  tasks: { name: string }[] = [
-    { name: 'タスク1' },
-    { name: 'タスク2' },
-  ];
-  constructor(public actionSheetController: ActionSheetController, public alertController: AlertController) { }
+  tasks: { name: string }[] = [{ name: 'タスク1' }, { name: 'タスク2' }];
+  constructor(
+    public actionSheetController: ActionSheetController,
+    public alertController: AlertController
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewWillEnter() {
     if ('tasks' in localStorage) {
@@ -62,7 +61,8 @@ export class TaskListPage implements OnInit {
           name: 'task',
           placeholder: 'タスク',
           value: this.tasks[index].name
-        }],
+        }
+      ],
       buttons: [
         {
           text: '閉じる'

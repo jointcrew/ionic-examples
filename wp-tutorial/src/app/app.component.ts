@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
       if (params instanceof NavigationEnd && !this.platform.is('hybrid')) {
         gtag('config', 'UA-154216863-1', { page_path: params.url });
       }
-    })
+    });
   }
 
   initializeApp() {
