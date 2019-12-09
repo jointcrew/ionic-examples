@@ -1,0 +1,36 @@
+{
+  "name": "ionic-examples",
+  "version": "1.0.0",
+  "description": "Ionic学習用リポジトリ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jointcrew/ionic-examples.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jointcrew/ionic-examples/issues"
+  },
+  "homepage": "https://github.com/jointcrew/ionic-examples#readme",
+  "devDependencies": {
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
+    "prettier": "1.19.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{html,ts,json,scss,md,yml}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
