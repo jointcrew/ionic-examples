@@ -5,19 +5,26 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { SharedModule } from '../shared/shared.module';
+import { ArticlePage } from '../article/article.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',
         component: HomePage
+      },
+      {
+        path: ':articleId',
+        component: ArticlePage
       }
     ])
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, ArticlePage]
 })
 export class HomePageModule {}

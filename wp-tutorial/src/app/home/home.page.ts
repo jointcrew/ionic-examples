@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
-
-interface Item {
-  ID: number;
-  title: string;
-  content: string;
-  date: string;
-}
+import { WordpressService } from '../wordpress.service';
+import { IPost } from '../interfaces/post';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +9,11 @@ interface Item {
   styleUrls: ['home.page.scss']
 })
 export class HomePage {
-  posts: Item[] = [];
+  posts: IPost[] = [];
 
   constructor(
-    private http: HttpClient,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    public wordpress: WordpressService
   ) {}
 
   async ionViewDidEnter() {
@@ -29,17 +23,13 @@ export class HomePage {
     if (!this.posts.length) {
       await loading.present();
     }
-    this.http
-      .get(
-        'https://public-api.wordpress.com/rest/v1.1/sites/ionicjp.wordpress.com/posts'
-      )
-      .subscribe(data => {
-        this.posts = data['posts'];
-        loading.dismiss();
-      });
+    this.wordpress.getPost().subscribe(data => {
+      this.posts = data['posts'];
+      loading.dismiss();
+    });
   }
 
-  trackByFn(index, item: Item): number {
+  trackByFn(index, item: IPost): number {
     return item.ID;
   }
 }

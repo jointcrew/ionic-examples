@@ -9,14 +9,7 @@
 
 <ion-content>
   <ion-card *ngIf="!post?.ID">
-    <ion-card-header>
-      <ion-card-subtitle>
-        <ion-skeleton-text animated="true"></ion-skeleton-text>
-      </ion-card-subtitle>
-      <ion-card-title>
-        <ion-skeleton-text animated="true"></ion-skeleton-text>
-      </ion-card-title>
-    </ion-card-header>
+    <app-wp-head [title]="post?.title" [date]="post?.date"></app-wp-head>
   </ion-card>
   <ion-card *ngIf="post?.ID">
     <ion-card-header>
