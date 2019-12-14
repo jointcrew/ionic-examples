@@ -6,4 +6,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <img [src]="photo" *ngIf="photo" />
+  <ion-fab-button (click)="takePicture()">
+    <ion-icon name="camera"></ion-icon>
+  </ion-fab-button>
+</ion-content>

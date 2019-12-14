@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CameraResultType, Plugins } from '@capacitor/core';
 
 @Component({
   selector: 'app-tab3',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  photo;
   constructor() {}
+
+  async takePicture() {
+    const image = await Plugins.Camera.getPhoto({
+      quality: 100,
+      resultType: CameraResultType.DataUrl
+    });
+    this.photo = image.dataUrl;
+  }
 }
