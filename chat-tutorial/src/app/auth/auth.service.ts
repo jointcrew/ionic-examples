@@ -53,4 +53,8 @@ export class AuthService {
     });
     await alert.present();
   }
+
+  getUserId(): string {
+    return this.afAuth.auth.currentUser.uid;
+  }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CameraResultType, Plugins } from '@capacitor/core';
+import { FirestoreService, IUser } from '../firestore.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,15 +11,35 @@ import { CameraResultType, Plugins } from '@capacitor/core';
 })
 export class ProfilePage implements OnInit {
   uid: string;
-  user = {
+  user: IUser = {
     displayName: null,
     photoDataUrl: null
   };
   photo: string;
 
-  constructor(public modalController: ModalController) {}
+  constructor(
+    public modalController: ModalController,
+    public auth: AuthService,
+    public firestore: FirestoreService
+  ) {}
 
   ngOnInit() {}
+
+  async ionViewWillEnter() {
+    this.uid = this.auth.getUserId();
+    const user = await this.firestore.userInit(this.uid);
+    if (user) {
+      this.user = user;
+    }
+  }
+
+  async updateProfile() {
+    if (this.photo) {
+      this.user.photoDataUrl = this.photo;
+    }
+    await this.firestore.userSet(this.user);
+    this.modalController.dismiss();
+  }
 
   modalDismiss() {
     this.modalController.dismiss();
