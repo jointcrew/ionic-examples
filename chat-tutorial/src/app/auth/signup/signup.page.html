@@ -32,7 +32,10 @@
       </ion-item>
     </ion-list>
     <div class="ion-text-center ion-padding-top">
-      <ion-button type="submit" shape="round" [disabled]="!f.form.valid"
+      <ion-button
+        type="submit"
+        shape="round"
+        [disabled]="!f.form.valid || loading"
         >新規作成</ion-button
       >
     </div>

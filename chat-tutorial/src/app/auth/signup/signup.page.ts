@@ -7,12 +7,16 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./signup.page.scss']
 })
 export class SignupPage implements OnInit {
+  loading = false;
   login: { email: string; password: string } = { email: null, password: null };
   constructor(public authService: AuthService) {}
 
   ngOnInit() {}
 
   signUp() {
-    this.authService.authSignUp(this.login);
+    this.loading = true;
+    this.authService
+      .authSignUp(this.login)
+      .finally(() => (this.loading = false));
   }
 }
